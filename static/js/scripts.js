@@ -1,24 +1,7 @@
-const carouselLinks = document.querySelectorAll('.image-tn a');
-const carousel = document.querySelector('figure img');
-const carouselPara = document.querySelector('figcaption');
-
-carouselLinks.forEach(carouselLink =>
-  carouselLink.addEventListener('click', runCarousel),
-);
-
-function runCarousel() {
-  const imageHref = event.target.parentNode.getAttribute('href');
-  const titleText = event.target.title;
-  carousel.setAttribute('src', imageHref);
-  carouselPara.innerHTML = titleText;
-  event.preventDefault();
-}
-
-//////
-
 document.addEventListener('click', clickHandlers)
 
 function clickHandlers(){
+  console.log(event.target)
   if (event.target.matches('#pull')){
     document.querySelector('body').classList.toggle('show-nav');
     event.preventDefault();
@@ -27,6 +10,17 @@ function clickHandlers(){
     videoSwitch()
     event.preventDefault();
   }
+  else if (event.target.matches('.image-tn img')) {
+    runCarousel()
+    event.preventDefault();
+  }
+}
+
+function runCarousel(){
+  const imageHref = event.target.parentNode.getAttribute('href');
+  const titleText = event.target.title;
+  document.querySelector('figure img').setAttribute('src', imageHref);
+  document.querySelector('figcaption').innerHTML = titleText;
 }
 
 var videoSwitch = function () {
